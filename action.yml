@@ -1,12 +1,12 @@
-name: 'CI Datadog Agent'
-description: 'Starts a Datadog agent for a job and gracefully shut it down before the job finishes'
+name: 'Datadog Agent'
+description: 'Starts a Datadog Agent for a job and gracefully shut it down before the job finishes'
 inputs:
   container_name:
-    description: 'The datadog-agent docker container name'
+    description: 'The Datadog Agent container name'
     required: true
     default: 'datadog-agent'
   image_name:
-    description: 'The docker registry image to use'
+    description: 'The Datadog Agent container image name to use'
     required: true
     default: 'gcr.io/datadoghq/agent'
   api_key:
