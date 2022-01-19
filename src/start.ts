@@ -1,9 +1,5 @@
 import {exec} from '@actions/exec'
 
-export async function pullImage(imageName: string): Promise<number> {
-  return exec('docker', ['pull', imageName])
-}
-
 export async function startAgent(
   imageName: string,
   containerName: string,
@@ -15,10 +11,6 @@ export async function startAgent(
     '-d',
     '--name',
     containerName,
-    '-v',
-    '/var/run/docker.sock:/var/run/docker.sock:ro',
-    '-v',
-    '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro',
     '-e',
     `DD_API_KEY=${apiKey}`,
     '-e',

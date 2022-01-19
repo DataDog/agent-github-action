@@ -41,15 +41,11 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const imageName = core.getInput('imageName', { required: true });
-            core.info(`Pulling docker image '${imageName}'`);
-            let code = yield (0, start_1.pullImage)(imageName);
-            if (code !== 0)
-                throw new Error(`could not pull agent image: (${code})`);
             const containerName = core.getInput('containerName', { required: true });
             const apiKey = core.getInput('apiKey', { required: true });
             const site = core.getInput('site', { required: true });
             core.info('Starting agent');
-            code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site);
+            let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site);
             if (code !== 0)
                 throw new Error(`could not start agent: (${code})`);
             code = 1;
@@ -93,14 +89,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getAgentHealth = exports.startAgent = exports.pullImage = void 0;
+exports.getAgentHealth = exports.startAgent = void 0;
 const exec_1 = __nccwpck_require__(514);
-function pullImage(imageName) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return (0, exec_1.exec)('docker', ['pull', imageName]);
-    });
-}
-exports.pullImage = pullImage;
 function startAgent(imageName, containerName, apiKey, site) {
     return __awaiter(this, void 0, void 0, function* () {
         return (0, exec_1.exec)('docker', [
@@ -108,10 +98,6 @@ function startAgent(imageName, containerName, apiKey, site) {
             '-d',
             '--name',
             containerName,
-            '-v',
-            '/var/run/docker.sock:/var/run/docker.sock:ro',
-            '-v',
-            '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro',
             '-e',
             `DD_API_KEY=${apiKey}`,
             '-e',
