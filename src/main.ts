@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import {pullImage, startAgent} from './start'
+import {getAgentHealth, pullImage, startAgent} from './start'
 
 async function run(): Promise<void> {
   try {
@@ -15,6 +15,15 @@ async function run(): Promise<void> {
     core.info('Starting agent')
     code = await startAgent(imageName, containerName, apiKey, site)
     if (code !== 0) throw new Error(`could not start agent: (${code})`)
+
+    code = 1
+    let attempts = 0;
+    while (code !== 0 && attempts < 10) {
+      core.info('checking agent health')
+      code = await getAgentHealth(containerName)
+      if (code !== 0) await new Promise(f => setTimeout(f, 1000 * attempts + 1))
+    }
+
     core.info('Agent started')
     // TODO wait until agent has started
   } catch (error) {

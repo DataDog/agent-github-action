@@ -32,3 +32,7 @@ export async function startAgent(
     imageName
   ])
 }
+
+export async function getAgentHealth(containerName: string) {
+  return exec('docker', ['exec', '-t', containerName, 'agent', 'status'])
+}
