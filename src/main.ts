@@ -22,11 +22,13 @@ async function run(): Promise<void> {
       attempts++
       core.info('checking agent health')
       code = await getAgentHealth(containerName)
-      if (code !== 0) await new Promise(f => setTimeout(f, 10000 * attempts))
+      if (code !== 0) {
+        core.info(`the agent is not ready waiting ${5 * attempts} seconds`)
+        await new Promise(f => setTimeout(f, 5000 * attempts))
+      }
     }
 
     core.info('Agent started')
-    // TODO wait until agent has started
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }

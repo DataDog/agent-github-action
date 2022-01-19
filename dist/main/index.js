@@ -58,11 +58,12 @@ function run() {
                 attempts++;
                 core.info('checking agent health');
                 code = yield (0, start_1.getAgentHealth)(containerName);
-                if (code !== 0)
-                    yield new Promise(f => setTimeout(f, 10000 * attempts));
+                if (code !== 0) {
+                    core.info(`the agent is not ready waiting ${5 * attempts} seconds`);
+                    yield new Promise(f => setTimeout(f, 5000 * attempts));
+                }
             }
             core.info('Agent started');
-            // TODO wait until agent has started
         }
         catch (error) {
             if (error instanceof Error)
