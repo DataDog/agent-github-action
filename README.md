@@ -9,7 +9,7 @@ on: [push]
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action
+      - uses: datadog/agent-github-action@v1
         with:
             apiKey: ${{ secrets.DD_API_KEY }}
       - uses: actions/checkout@v2
