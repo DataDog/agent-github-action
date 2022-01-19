@@ -3,10 +3,10 @@ import {getAgentHealth, startAgent} from './start'
 
 async function run(): Promise<void> {
   try {
-    const imageName: string = core.getInput('imageName', {required: true})
-    const containerName: string = core.getInput('containerName', {required: true})
-    const apiKey: string = core.getInput('apiKey', {required: true})
-    const site: string = core.getInput('site', {required: true})
+    const imageName: string = core.getInput('image_name', {required: true})
+    const containerName: string = core.getInput('container_name', {required: true})
+    const apiKey: string = core.getInput('api_key', {required: true})
+    const site: string = core.getInput('datadog_site', {required: true})
 
     core.info('Starting agent')
     let code = await startAgent(imageName, containerName, apiKey, site)

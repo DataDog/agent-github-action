@@ -40,7 +40,7 @@ const stop_1 = __nccwpck_require__(528);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const containerName = core.getInput('containerName', { required: true });
+            const containerName = core.getInput('container_name', { required: true });
             core.info('Stopping agent');
             const code = yield (0, stop_1.stopAgent)(containerName);
             if (code !== 0)

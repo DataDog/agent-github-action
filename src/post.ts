@@ -3,7 +3,7 @@ import {stopAgent} from './stop'
 
 async function run(): Promise<void> {
   try {
-    const containerName: string = core.getInput('containerName', {required: true})
+    const containerName: string = core.getInput('container_name', {required: true})
     core.info('Stopping agent')
     const code = await stopAgent(containerName)
     if (code !== 0) throw new Error(`could not stop agent (${code})`)
