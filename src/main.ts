@@ -22,7 +22,7 @@ async function run(): Promise<void> {
       attempts++
       core.info('checking agent health')
       code = await getAgentHealth(containerName)
-      if (code !== 0) await new Promise(f => setTimeout(f, 1000 * attempts))
+      if (code !== 0) await new Promise(f => setTimeout(f, 10000 * attempts))
     }
 
     core.info('Agent started')

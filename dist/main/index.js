@@ -59,7 +59,7 @@ function run() {
                 core.info('checking agent health');
                 code = yield (0, start_1.getAgentHealth)(containerName);
                 if (code !== 0)
-                    yield new Promise(f => setTimeout(f, 1000 * attempts));
+                    yield new Promise(f => setTimeout(f, 10000 * attempts));
             }
             core.info('Agent started');
             // TODO wait until agent has started
