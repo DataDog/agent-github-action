@@ -8,7 +8,7 @@ inputs:
   imageName:
     description: 'The docker registry image to use'
     required: true
-    default: 'gcr.io/datadog/agent'
+    default: 'gcr.io/datadoghq/agent'
   apiKey:
     description: 'The Datadog API key'
     required: true
