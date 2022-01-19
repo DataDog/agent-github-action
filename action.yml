@@ -1,0 +1,22 @@
+name: 'CI Datadog Docker Agent'
+description: 'Starts a docker Datadog agent for a job and gracefully shut it down'
+inputs:
+  containerName:
+    description: 'The datadog-agent docker container name'
+    required: true
+    default: 'datadog-agent'
+  imageName:
+    description: 'The docker registry image to use'
+    required: true
+    default: 'datadog/agent'
+  apiKey:
+    description: 'The Datadog API key'
+    required: true
+  site:
+    description: 'The Datadog site'
+    required: true
+    default: "datadoghq.com"
+runs:
+  using: 'node12'
+  main: 'dist/main/index.js'
+  post: 'dist/post/index.js'
