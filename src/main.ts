@@ -28,6 +28,8 @@ async function run(): Promise<void> {
       }
     }
 
+    if (code !== 0) throw new Error(`could not start agent: (${code})`)
+
     core.info('Agent started')
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
