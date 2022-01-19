@@ -52,6 +52,15 @@ function run() {
             code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site);
             if (code !== 0)
                 throw new Error(`could not start agent: (${code})`);
+            code = 1;
+            let attempts = 0;
+            while (code !== 0 && attempts < 10) {
+                attempts++;
+                core.info('checking agent health');
+                code = yield (0, start_1.getAgentHealth)(containerName);
+                if (code !== 0)
+                    yield new Promise(f => setTimeout(f, 1000 * attempts));
+            }
             core.info('Agent started');
             // TODO wait until agent has started
         }
@@ -81,7 +90,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.startAgent = exports.pullImage = void 0;
+exports.getAgentHealth = exports.startAgent = exports.pullImage = void 0;
 const exec_1 = __nccwpck_require__(514);
 function pullImage(imageName) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -115,6 +124,12 @@ function startAgent(imageName, containerName, apiKey, site) {
     });
 }
 exports.startAgent = startAgent;
+function getAgentHealth(containerName) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return (0, exec_1.exec)('docker', ['exec', '-t', containerName, 'agent', 'status']);
+    });
+}
+exports.getAgentHealth = getAgentHealth;
 
 
 /***/ }),

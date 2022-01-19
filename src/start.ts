@@ -33,6 +33,6 @@ export async function startAgent(
   ])
 }
 
-export async function getAgentHealth(containerName: string) {
+export async function getAgentHealth(containerName: string): Promise<number> {
   return exec('docker', ['exec', '-t', containerName, 'agent', 'status'])
 }
