@@ -127,7 +127,7 @@ function startAgent(imageName, containerName, apiKey, site) {
 exports.startAgent = startAgent;
 function getAgentHealth(containerName) {
     return __awaiter(this, void 0, void 0, function* () {
-        return (0, exec_1.exec)('docker', ['exec', '-t', containerName, 'agent', 'status'], { ignoreReturnCode: true });
+        return (0, exec_1.exec)('docker', ['exec', '-t', containerName, 'agent', 'check', 'health'], { ignoreReturnCode: true });
     });
 }
 exports.getAgentHealth = getAgentHealth;
