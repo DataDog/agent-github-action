@@ -1,18 +1,18 @@
 name: 'Datadog Agent'
 description: 'Starts a Datadog Agent for a job and gracefully shut it down before the job finishes'
 inputs:
-  containerName:
+  container_name:
     description: 'The Datadog Agent container name'
     required: true
     default: 'datadog-agent'
-  imageName:
+  image_name:
     description: 'The Datadog Agent container image name to use'
     required: true
     default: 'gcr.io/datadoghq/agent'
-  apiKey:
+  api_key:
     description: 'The Datadog API key'
     required: true
-  site:
+  datadog_site:
     description: 'The Datadog site'
     required: true
     default: "datadoghq.com"

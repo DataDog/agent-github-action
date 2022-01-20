@@ -1,5 +1,5 @@
 {
-  "name": "datadog-agent-action",
+  "name": "datadog-agent-github-action",
   "version": "0.1.0",
   "description": "Action to start a Datadog agent in the background for the duration of the job",
   "main": "lib/main.js",
