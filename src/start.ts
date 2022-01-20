@@ -19,8 +19,12 @@ export async function startAgent(
     'DD_HOSTNAME=none',
     '-e',
     `DD_SITE=${site}`,
+    '-e',
+    'DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true',
     '-p',
-    '8126:8126',
+    '8125:8125/udp',
+    '-p',
+    '8126:8126/tcp',
     imageName
   ])
 }

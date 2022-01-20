@@ -1,5 +1,5 @@
 name: 'Datadog Agent'
-description: 'Starts a Datadog Agent for a job and gracefully shut it down before the job finishes'
+description: 'Starts a Datadog Agent and gracefully shuts it down before the job finishes'
 inputs:
   container_name:
     description: 'The Datadog Agent container name'

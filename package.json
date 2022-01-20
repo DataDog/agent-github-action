@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/datadog/datadog-agent-action.git"
+    "url": "git+https://github.com/datadog/agent-github-action.git"
   },
   "keywords": [
     "actions",
@@ -22,7 +22,7 @@
     "setup",
     "agent"
   ],
-  "author": "Carlos Gonzalez <carlos.gonzalez@datadoghq.com>",
+  "author": "Datadog <ci-visibility-feedback@datadoghq.com>",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.6.0",
