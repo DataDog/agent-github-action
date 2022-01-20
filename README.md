@@ -11,7 +11,7 @@ on: [push]
 jobs:
   test:
     steps:
-      - uses: datadog/agent-github-action@v1
+      - uses: datadog/agent-github-action@v0.1.0
         with:
             api_key: ${{ secrets.DD_API_KEY }}
       - uses: actions/checkout@v2
