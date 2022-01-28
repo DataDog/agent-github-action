@@ -27,6 +27,9 @@ async function run(): Promise<void> {
     if (code !== 0) throw new Error(`could not start agent: (${code})`)
 
     core.info('Agent started')
+    
+    core.exportVariable('DD_ENV', 'ci')
+    core.exportVariable('DD_SERVICE', process.env.GITHUB_REPOSITORY)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
