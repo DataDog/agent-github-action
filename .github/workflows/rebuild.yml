@@ -1,0 +1,12 @@
+name: 'Rebuild project on comment'
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  build_and_package:
+    name: 'Build and package'
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/build')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ls .github/workflows
