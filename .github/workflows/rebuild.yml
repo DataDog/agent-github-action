@@ -1,0 +1,31 @@
+name: 'Rebuild project on comment'
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  build_and_package:
+    name: 'Build and package'
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && contains(['OWNER', 'MEMBER'], github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.1.4
+        id: get_pull_request
+        with:
+          route: GET /repos/{owner}/{repo}/pulls/{number}
+          owner: DataDog
+          repo: agent-github-action
+          number: ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{steps.get_pull_request.outputs.data}}"
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{fromJSON(steps.get_pull_request.outputs.data).head.ref}}
+      - run: echo "Hello ${{toJSON(github.event.issue)}}" > hello.txt
+      - run: git add hello.txt
+      - name: Push changes
+        run: |
+          git config --global user.name '${GITHUB_ACTOR}'
+          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
+          git commit -am "Rebuild"
+          git push
