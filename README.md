@@ -28,3 +28,4 @@ The action has the following options:
 | `container_name` | The name for the docker container that runs the agent. | True | `datadog-agent` |
 | `image_name` | The docker registry and image to pull. It has to be one of [`datadog/agent` (Docker), `gcr.io/datadoghq/agent` (GCR), `public.ecr.aws/datadog/agent` (ECR)] | True | `gcr.io/datadoghq/agent` |
 | `datadog_site` | The Datadog site to send data to. | True | `datadoghq.com` |
+| `extra_env` | A comma separated list of environment variables to pass to the Datadog agent. (e.g. `DD_APM_MAX_EPS=500`) | False | |

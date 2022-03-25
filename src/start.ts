@@ -4,9 +4,10 @@ export async function startAgent(
   imageName: string,
   containerName: string,
   apiKey: string,
-  site: string
+  site: string,
+  extra_env: string[]
 ): Promise<number> {
-  return exec('docker', [
+  const args = [
     'run',
     '-d',
     '--name',
@@ -24,9 +25,16 @@ export async function startAgent(
     '-p',
     '8125:8125/udp',
     '-p',
-    '8126:8126/tcp',
-    imageName
-  ])
+    '8126:8126/tcp'
+  ]
+
+  for (const key_value of extra_env) {
+    args.push('-e', key_value)
+  }
+
+  args.push(imageName)
+
+  return exec('docker', args)
 }
 
 export async function getAgentHealth(containerName: string): Promise<number> {

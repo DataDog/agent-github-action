@@ -44,8 +44,10 @@ function run() {
             const containerName = core.getInput('container_name', { required: true });
             const apiKey = core.getInput('api_key', { required: true });
             const site = core.getInput('datadog_site', { required: true });
+            const passthrough_env = core.getInput('extra_env', { required: false });
+            const extra_env = passthrough_env ? passthrough_env.split(',').map((envvar) => envvar.trim()) : [];
             core.info('Starting agent');
-            let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site);
+            let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site, extra_env);
             if (code !== 0)
                 throw new Error(`could not start agent: (${code})`);
             code = 1;
@@ -91,9 +93,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getAgentHealth = exports.startAgent = void 0;
 const exec_1 = __nccwpck_require__(514);
-function startAgent(imageName, containerName, apiKey, site) {
+function startAgent(imageName, containerName, apiKey, site, extra_env) {
     return __awaiter(this, void 0, void 0, function* () {
-        return (0, exec_1.exec)('docker', [
+        const args = [
             'run',
             '-d',
             '--name',
@@ -111,9 +113,13 @@ function startAgent(imageName, containerName, apiKey, site) {
             '-p',
             '8125:8125/udp',
             '-p',
-            '8126:8126/tcp',
-            imageName
-        ]);
+            '8126:8126/tcp'
+        ];
+        for (const key_value of extra_env) {
+            args.push('-e', key_value);
+        }
+        args.push(imageName);
+        return (0, exec_1.exec)('docker', args);
     });
 }
 exports.startAgent = startAgent;
