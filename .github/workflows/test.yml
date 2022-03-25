@@ -5,6 +5,7 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
       - 'releases/*'
+      - 'carlos.gonzalez/*'
 
 jobs:
   build: # make sure build/ci work properly
@@ -22,4 +23,5 @@ jobs:
       - uses: ./
         with:
           api_key: ${{ secrets.DD_API_KEY }}
-          datadog_site: "datad0g.com"
+          datadog_site: "dd.datad0g.com"
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

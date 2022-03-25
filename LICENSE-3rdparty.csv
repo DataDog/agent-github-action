@@ -1,5 +1,6 @@
 @actions/core,import,MIT,Copyright 2019 GitHub
 @actions/exec,import,MIT,Copyright 2019 GitHub
+@actions/github,import,MIT,Copyright 2019 GitHub
 @types/node,dev,MIT,Copyright Microsoft Corporation
 @typescript-eslint/eslint-plugin,dev,BSD 2-Clause License, Copyr
 @typescript-eslint/parser,dev,BSD 2-Clause License, Copyright JS

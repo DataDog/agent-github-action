@@ -19,6 +19,9 @@ inputs:
   extra_env:
     description: 'A comma separated list of environment variables to pass to the agent'
     required: false
+  GITHUB_TOKEN:
+    description: 'The token to use to access the github api'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/main/index.js'
