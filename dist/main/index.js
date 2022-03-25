@@ -45,9 +45,7 @@ function run() {
             const apiKey = core.getInput('api_key', { required: true });
             const site = core.getInput('datadog_site', { required: true });
             const passthrough_env = core.getInput('extra_env', { required: false });
-            const extra_env = passthrough_env
-                ? passthrough_env.split(',').map((key_value) => key_value.trim())
-                : [];
+            const extra_env = passthrough_env ? passthrough_env.split(',').map((envvar) => envvar.trim()) : [];
             core.info('Starting agent');
             let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site, extra_env);
             if (code !== 0)

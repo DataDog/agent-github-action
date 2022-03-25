@@ -8,9 +8,7 @@ async function run(): Promise<void> {
     const apiKey: string = core.getInput('api_key', {required: true})
     const site: string = core.getInput('datadog_site', {required: true})
     const passthrough_env: string = core.getInput('extra_env', {required: false})
-    const extra_env: string[] = passthrough_env
-      ? passthrough_env.split(',').map((key_value: string) => key_value.trim())
-      : []
+    const extra_env: string[] = passthrough_env ? passthrough_env.split(',').map((envvar: string) => envvar.trim()) : []
 
     core.info('Starting agent')
     let code = await startAgent(imageName, containerName, apiKey, site, extra_env)
