@@ -42,7 +42,13 @@ function run() {
         try {
             const containerName = core.getInput('container_name', { required: true });
             core.info('Stopping agent');
-            const code = yield (0, stop_1.stopAgent)(containerName);
+            let code = 0;
+            if (process.env['RUNNER_OS'] === 'Windows') {
+                code = yield (0, stop_1.stopWindowsAgent)(containerName);
+            }
+            else {
+                code = yield (0, stop_1.stopAgent)(containerName);
+            }
             if (code !== 0)
                 throw new Error(`could not stop agent (${code})`);
             core.info('Agent stopped');
@@ -73,7 +79,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.stopAgent = void 0;
+exports.stopWindowsAgent = exports.stopAgent = void 0;
 const exec_1 = __nccwpck_require__(514);
 function stopAgent(containerName) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -81,6 +87,12 @@ function stopAgent(containerName) {
     });
 }
 exports.stopAgent = stopAgent;
+function stopWindowsAgent(containerName) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return (0, exec_1.exec)('docker', ['exec', '-t', containerName, 'agent', 'stopservice']);
+    });
+}
+exports.stopWindowsAgent = stopWindowsAgent;
 
 
 /***/ }),
