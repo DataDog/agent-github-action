@@ -5,10 +5,9 @@ on:
 jobs:
   build_and_package:
     name: 'Build and package'
-    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && (github.event.issue.author_association == 'COLLABORATOR' || github.event.issue.author_association == 'MEMBER')
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build')
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{github.event.issue.author_association}}"
       - uses: octokit/request-action@v2.1.4
         id: get_pull_request
         with:
@@ -18,7 +17,6 @@ jobs:
           number: ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "${{steps.get_pull_request.outputs.data}}"
       - uses: actions/checkout@v3
         with:
           ref: ${{fromJSON(steps.get_pull_request.outputs.data).head.ref}}
