@@ -1,0 +1,38 @@
+name: 'Rebuild project on comment'
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  build_and_package:
+    name: 'Build and package'
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && contains(['OWNER', 'MEMBER'], github.event.issue.author_association)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: octokit/request-action@v2.1.4
+        id: get_pull_request
+        with:
+          route: GET /repos/{owner}/{repo}/pulls/{number}
+          owner: DataDog
+          repo: agent-github-action
+          number: ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "${{steps.get_pull_request.outputs.data}}"
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{fromJSON(steps.get_pull_request.outputs.data).head.ref}}
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm install --save-dev
+      - name: Rebuild the dist/ directory
+        run: |
+          npm run build
+          npm run package
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Rebuild javascript
+          skip_fecth: true
+          skip_checkout: true
