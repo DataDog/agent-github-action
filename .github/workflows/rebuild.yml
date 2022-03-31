@@ -5,9 +5,10 @@ on:
 jobs:
   build_and_package:
     name: 'Build and package'
-    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && (github.event.issue.author_association == 'MEMBER' || github.event.issue.author_association == 'OWNER') 
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') 
     runs-on: ubuntu-latest
     steps:
+      - run: echo "${{github.event.issue.author_association}}"
       - uses: octokit/request-action@v2.1.4
         id: get_pull_request
         with:
