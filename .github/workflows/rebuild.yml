@@ -5,7 +5,7 @@ on:
 jobs:
   build_and_package:
     name: 'Build and package'
-    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build')
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && (github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'MEMBER') 
     runs-on: ubuntu-latest
     steps:
       - uses: octokit/request-action@v2.1.4
@@ -33,5 +33,5 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Rebuild javascript
-          skip_fecth: true
+          skip_fetch: true
           skip_checkout: true
