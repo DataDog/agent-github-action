@@ -5,7 +5,7 @@ on:
 jobs:
   build_and_package:
     name: 'Build and package'
-    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') 
+    if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && (github.event.issue.author_association == 'COLLABORATOR' || github.event.issue.author_association == 'MEMBER')
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{github.event.issue.author_association}}"
