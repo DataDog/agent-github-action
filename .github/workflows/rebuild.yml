@@ -21,11 +21,18 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{fromJSON(steps.get_pull_request.outputs.data).head.ref}}
-      - run: echo "Hello ${{toJSON(github.event.issue)}}" > hello.txt
-      - run: git add hello.txt
-      - name: Push changes
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: npm install --save-dev
+      - name: Rebuild the dist/ directory
         run: |
-          git config --global user.name '${GITHUB_ACTOR}'
-          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
-          git commit -am "Rebuild"
-          git push
+          npm run build
+          npm run package
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Rebuild javascript
+          skip_fecth: true
+          skip_checkout: true
