@@ -26,3 +26,5 @@ jobs:
         with:
           api_key: ${{ secrets.DD_API_KEY }}
           datadog_site: "datad0g.com"
+          max_retires: "12"
+          initial_wait_time: "2"

@@ -19,6 +19,14 @@ inputs:
   extra_env:
     description: 'A comma separated list of environment variables to pass to the agent'
     required: false
+  max_retries:
+    description: 'The maximum number of times the action will poll the agent to see if it is ready'
+    required: true
+    default: '10'
+  initial_wait_time:
+    description: 'The initial wait time in seconds between polls to see if the agent is ready'
+    required: true
+    default: '5'
 runs:
   using: 'node12'
   main: 'dist/main/index.js'
