@@ -50,7 +50,7 @@ function run() {
             const site = core.getInput('datadog_site', { required: true });
             const passthrough_env = core.getInput('extra_env', { required: false });
             const extra_env = passthrough_env ? passthrough_env.split(',').map((envvar) => envvar.trim()) : [];
-            const maxRetries = parseInt(core.getInput('max_retires', { required: true }));
+            const maxRetries = parseInt(core.getInput('max_retries', { required: true }));
             const initialWaitTime = parseInt(core.getInput('initial_wait_time', { required: true }));
             core.info('Starting agent');
             let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site, extra_env);
