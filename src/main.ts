@@ -9,7 +9,7 @@ async function run(): Promise<void> {
     const site: string = core.getInput('datadog_site', {required: true})
     const passthrough_env: string = core.getInput('extra_env', {required: false})
     const extra_env: string[] = passthrough_env ? passthrough_env.split(',').map((envvar: string) => envvar.trim()) : []
-    const maxRetries: number = parseInt(core.getInput('max_retires', {required: true}))
+    const maxRetries: number = parseInt(core.getInput('max_retries', {required: true}))
     const initialWaitTime: number = parseInt(core.getInput('initial_wait_time', {required: true}))
 
     core.info('Starting agent')
