@@ -8,7 +8,7 @@ jobs:
     if: github.event.issue.pull_request && startsWith(github.event.comment.body, '\build') && (github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'MEMBER') 
     runs-on: ubuntu-latest
     steps:
-      - uses: octokit/request-action@v2.1.4
+      - uses: octokit/request-action@v2.1.6
         id: get_pull_request
         with:
           route: GET /repos/{owner}/{repo}/pulls/{number}
