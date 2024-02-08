@@ -52,6 +52,7 @@ function run() {
             const extra_env = passthrough_env ? passthrough_env.split(',').map((envvar) => envvar.trim()) : [];
             const maxRetries = parseInt(core.getInput('max_retries', { required: true }));
             const initialWaitTime = parseInt(core.getInput('initial_wait_time', { required: true }));
+            core.warning('This action is deprecated and will be removed in the future. Please use the new agentless mode instead. Read more in https://docs.datadoghq.com/tests/setup/javascript/?tab=cloudciprovideragentless#configuring-reporting-method');
             core.info('Starting agent');
             let code = yield (0, start_1.startAgent)(imageName, containerName, apiKey, site, extra_env);
             if (code !== 0)
