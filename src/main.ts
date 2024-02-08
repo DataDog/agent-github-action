@@ -12,6 +12,10 @@ async function run(): Promise<void> {
     const maxRetries: number = parseInt(core.getInput('max_retries', {required: true}))
     const initialWaitTime: number = parseInt(core.getInput('initial_wait_time', {required: true}))
 
+    core.warning(
+      'This action is deprecated and will be removed in the future. Please use the new agentless mode instead. Read more in https://docs.datadoghq.com/tests/setup/javascript/?tab=cloudciprovideragentless#configuring-reporting-method'
+    )
+
     core.info('Starting agent')
     let code = await startAgent(imageName, containerName, apiKey, site, extra_env)
     if (code !== 0) throw new Error(`could not start agent: (${code})`)
