@@ -6,11 +6,11 @@
 
 This project is no longer maintained. The recommended way of using [Test Visibility](https://docs.datadoghq.com/tests/) in GitHub Actions is [agentless mode](https://docs.datadoghq.com/tests/setup/javascript/?tab=cloudciprovideragentless#configuring-reporting-method).
 
+## Usage
+
 Starts a Datadog Agent and gracefully shuts it down before the job finishes.
 
 The Datadog Agent will be available at `localhost:8125/udp` for metrics collection and `localhost:8126/tcp` for APM traces collection.
-
-## Usage
 
 ```yaml
 name: Test Code
