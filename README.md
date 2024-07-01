@@ -4,7 +4,7 @@
 
 ## Deprecation notice
 
-This project is no longer maintained. The recommended way of using [Test Visibility](https://docs.datadoghq.com/tests/) in GitHub Actions is [agentless mode](https://docs.datadoghq.com/tests/setup/javascript/?tab=cloudciprovideragentless#configuring-reporting-method).
+This project is no longer maintained. The recommended way of using [Test Visibility](https://docs.datadoghq.com/tests/) in GitHub Actions is [Test Visibility Github Action](https://github.com/DataDog/test-visibility-github-action).
 
 ## Usage
 
