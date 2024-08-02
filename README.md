@@ -4,7 +4,20 @@
 
 ## Deprecation notice
 
-This project is no longer maintained. The recommended way of using [Test Visibility](https://docs.datadoghq.com/tests/) in GitHub Actions is [Test Visibility Github Action](https://github.com/DataDog/test-visibility-github-action).
+This project is no longer maintained.
+ 
+The recommended way of using [Test Visibility](https://docs.datadoghq.com/tests/) in GitHub Actions is [Test Visibility Github Action](https://github.com/DataDog/test-visibility-github-action).
+
+If you need a Datadog Agent in your action for reasons other than Test Visibility, consider setting up a service:
+``` 
+services:
+  dd-agent:
+    image: gcr.io/datadoghq/agent:latest
+    env:
+      DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+    ports:
+      - 8126:8126
+```
 
 ## Usage
 
