@@ -15,6 +15,7 @@ services:
     image: gcr.io/datadoghq/agent:latest
     env:
       DD_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+      DD_HOSTNAME: "none"
     ports:
       - 8126:8126
 ```
